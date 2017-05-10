@@ -80,19 +80,51 @@
 		081C17421EC024CB00E95302 /* LoktraFlickerTask */ = {
 			isa = PBXGroup;
 			children = (
-				081C17431EC024CB00E95302 /* AppDelegate.swift */,
-				081C17451EC024CB00E95302 /* ViewController.swift */,
-				084E2C7D1EC319D200B4FC49 /* FlickrFeedCollectionViewCell.swift */,
+				084E2C811EC35DD500B4FC49 /* Model */,
+				084E2C821EC35DE100B4FC49 /* View */,
+				084E2C831EC35DED00B4FC49 /* Controller */,
+				081C174A1EC024CB00E95302 /* Assets.xcassets */,
+				081C174F1EC024CB00E95302 /* Info.plist */,
+			);
+			path = LoktraFlickerTask;
+			sourceTree = "<group>";
+		};
+		084E2C811EC35DD500B4FC49 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				081C17551EC0250600E95302 /* AllStructRelatedFile.swift */,
 				081C17571EC027DD00E95302 /* MakeServerApiCallStructFile.swift */,
 				081C17591EC0ADAE00E95302 /* ServerApiCallHandlingClass.swift */,
 				081C175F1EC0B87200E95302 /* DataHandlingModelClass.swift */,
-				081C17471EC024CB00E95302 /* Main.storyboard */,
-				081C174A1EC024CB00E95302 /* Assets.xcassets */,
-				081C174C1EC024CB00E95302 /* LaunchScreen.storyboard */,
-				081C174F1EC024CB00E95302 /* Info.plist */,
 			);
-			path = LoktraFlickerTask;
+			name = Model;
+			sourceTree = "<group>";
+		};
+		084E2C821EC35DE100B4FC49 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				081C17471EC024CB00E95302 /* Main.storyboard */,
+				081C174C1EC024CB00E95302 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		084E2C831EC35DED00B4FC49 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				081C17451EC024CB00E95302 /* ViewController.swift */,
+				084E2C7D1EC319D200B4FC49 /* FlickrFeedCollectionViewCell.swift */,
+				084E2C841EC35E2800B4FC49 /* Appdelegate */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		084E2C841EC35E2800B4FC49 /* Appdelegate */ = {
+			isa = PBXGroup;
+			children = (
+				081C17431EC024CB00E95302 /* AppDelegate.swift */,
+			);
+			name = Appdelegate;
 			sourceTree = "<group>";
 		};
 		8FC06AAFAF52F12319FB4D71 /* Frameworks */ = {

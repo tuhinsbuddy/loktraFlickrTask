@@ -17,12 +17,7 @@ class ServerApiCallHandlingClass: NSObject {
         debugPrint(apiToHit)
         debugPrint(paramObject)
         
-        
         Alamofire.request(apiToHit, parameters: paramObject).responseJSON { response in switch response.result{
-
-        
-        
-//        Alamofire.request(apiToHit, method: .get, parameters: paramObject, encoding: JSONEncoding.default, headers: nil).responseJSON { response in switch response.result{
             
         case .success(_):
             if let receivedData: Any = response.result.value,
@@ -39,10 +34,4 @@ class ServerApiCallHandlingClass: NSObject {
             }
         }
     }
-    
-    
-    
-    
-    
-    
 }

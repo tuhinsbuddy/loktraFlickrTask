@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         flickerImageFeedCollectionView.delegate = self
         flickerImageFeedCollectionView.dataSource = self
         DataHandlingModelClass.singletonForDataHandlingModelClass.flickrImageFeedResponseDelegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+        MakeAndCallApiStruct.makeAndHitApiForFlickerFeed()
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,18 +31,17 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        MakeAndCallApiStruct.makeAndHitApiForFlickerFeed()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if layoutManagedProperly != true{ //This method can be called by the system several times. This bool will ensure update layout will run only once in the lifecycle.
-            makeEqualSizeOfCells(cellCountValue: 2)
+            makeEqualSizeCollectionCells(cellCountValue: 2)
             
         }
     }
     
-    fileprivate func makeEqualSizeOfCells(cellCountValue cellCount: Int) {
+    fileprivate func makeEqualSizeCollectionCells(cellCountValue cellCount: Int) {
         let mainScreenWidth = UIScreen.main.bounds.width
         let flickrImageCollectionLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flickrImageCollectionLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -52,17 +51,22 @@ class ViewController: UIViewController {
         flickerImageFeedCollectionView.collectionViewLayout = flickrImageCollectionLayout
     }
     
+    fileprivate func showErrorAlert() {
+        let alertController = UIAlertController(title: "Flickr Image Load Error", message: "Flickr Image Loading Error!", preferredStyle: .alert)
+        let retryAction = UIAlertAction(title: "Retry", style: .default, handler: { finished in
+            MakeAndCallApiStruct.makeAndHitApiForFlickerFeed() //Retrying the flickr image feed fetching here.
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(retryAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
 }
 
 
 extension ViewController: UICollectionViewDelegate{
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-//        return (UIScreen.main.bounds.width / CGFloat(2.0))
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let currentCell = collectionView.cellForItem(at: indexPath) as? FlickrFeedCollectionViewCell{
             if currentCell.cellAlreadyFlipped == false{
@@ -147,6 +151,9 @@ extension ViewController: DataHandlingModelClassResponseDelegate{
             switch statusCode{
             case _ where statusCode == ApiResponseStatusCode.failureApiStatusCode:
                 debugPrint("Flickr image details failure response from server")
+                
+                showErrorAlert()//Showing error alert for image failed to load.
+                
                 
             case _ where statusCode == ApiResponseStatusCode.failureFromSystemStatusCode:
                 debugPrint("Flickr image details failure response from System")

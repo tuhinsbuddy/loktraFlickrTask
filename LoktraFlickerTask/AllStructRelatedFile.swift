@@ -1,8 +1,8 @@
 //
 //  AllStructRelatedFile.swift
-//  GithubTask
+//  LoktraFlickerTask
 //
-//  Created by Tuhin Samui on 05/05/17.
+//  Created by Tuhin Samui on 08/05/17.
 //  Copyright © 2017 Tuhin Samui. All rights reserved.
 //
 
